@@ -1,0 +1,87 @@
+# Tavoos Article TOC. GPL-2.0-or-later.
+msgid ""
+msgstr "Project-Id-Version: Tavoos Article TOC 1.0.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-10-07 00:00+0000\nPO-Revision-Date: 2026-10-07 00:00+0000\nLast-Translator: Tavoos Web\nLanguage-Team: fa_IR\nLanguage: fa_IR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Domain: tavoos-article-toc\n"
+
+msgid "Always collapsed"
+msgstr "همیشه بسته"
+
+msgid "Always expanded"
+msgstr "همیشه باز"
+
+msgid "An accessible, expandable table of contents for article headings, with RTL support and configurable display settings."
+msgstr "فهرست مطالب بازشونده و دسترس‌پذیر برای تیترهای مقاله، با پشتیبانی راست‌به‌چپ و تنظیمات نمایش."
+
+msgid "Article TOC"
+msgstr "فهرست مطالب مقاله"
+
+msgid "At the start of the content"
+msgstr "ابتدای محتوا"
+
+msgid "Automatic table of contents"
+msgstr "فهرست خودکار مطالب"
+
+msgid "Before the first heading"
+msgstr "پیش از نخستین تیتر"
+
+msgid "Build a table of contents from headings without changing the saved article. No external services or tracking."
+msgstr "فهرست مطالب از تیترها ساخته می‌شود، بدون تغییر محتوای ذخیره‌شده مقاله. بدون سرویس خارجی یا رهگیری."
+
+msgid "Custom content selector"
+msgstr "انتخابگر سفارشی محتوای مقاله"
+
+msgid "Display settings"
+msgstr "تنظیمات نمایش"
+
+msgid "Enable automatic display"
+msgstr "فعال‌سازی نمایش خودکار"
+
+msgid "Expanded on desktop, collapsed on mobile"
+msgstr "باز در رایانه، بسته در موبایل"
+
+msgid "H2 is used if no heading level is selected."
+msgstr "اگر هیچ سطحی انتخاب نشود، H2 استفاده می‌شود."
+
+msgid "Heading levels"
+msgstr "سطح تیترها"
+
+msgid "If the legacy Tavoos TOC is detected, this plugin stays inactive on that page. Do not disable entire HFCM snippets; remove only their TOC code during a separately approved migration."
+msgstr "اگر فهرست قدیمی طاووس شناسایی شود، افزونه در آن صفحه فهرست دیگری نمی‌سازد. اسنیپت‌های HFCM را کامل غیرفعال نکنید؛ در مهاجرتی با تأیید جداگانه، فقط کد مربوط به فهرست را حذف کنید."
+
+msgid "In this article"
+msgstr "فهرست مطالب این مقاله"
+
+msgid "Initial state"
+msgstr "وضعیت اولیه"
+
+msgid "Leave empty to use the translated default title."
+msgstr "برای استفاده از عنوان پیش‌فرض متناسب با زبان سایت، این بخش را خالی بگذارید."
+
+msgid "Minimum headings"
+msgstr "حداقل تعداد تیترها"
+
+msgid "Optional CSS selector for the article body, for example .entry-content. Leave empty for automatic WordPress content detection. Never select the whole page. An invalid selector safely disables the table."
+msgstr "انتخابگر CSS اختیاری برای بدنه مقاله، مانند .entry-content. برای شناسایی خودکار محتوای وردپرس خالی بگذارید. کل صفحه را انتخاب نکنید. انتخابگر نامعتبر، نمایش فهرست را متوقف می‌کند."
+
+msgid "Placement"
+msgstr "محل نمایش"
+
+msgid "Post types"
+msgstr "نوع محتوا"
+
+msgid "Scroll offset (pixels)"
+msgstr "فاصله پیمایش از بالای صفحه (پیکسل)"
+
+msgid "Select no post types to disable display everywhere."
+msgstr "برای غیرفعال‌کردن نمایش در همه‌جا، هیچ نوع محتوایی را انتخاب نکنید."
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Table of contents"
+msgstr "فهرست مطالب"
+
+msgid "Tavoos Article TOC"
+msgstr "فهرست مطالب طاووس"
+
+msgid "Title"
+msgstr "عنوان"

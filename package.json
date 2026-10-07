@@ -1,0 +1,9 @@
+{
+  "name": "tavoos-article-toc-dev",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Development-only browser tests; not shipped in the WordPress ZIP",
+  "license": "GPL-2.0-or-later",
+  "scripts": { "test": "node tests/browser.cjs", "build": "python3 tools/build-release.py" },
+  "devDependencies": { "playwright": "1.62.1" }
+}

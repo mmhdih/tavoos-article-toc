@@ -1,0 +1,87 @@
+# Tavoos Article TOC. GPL-2.0-or-later.
+msgid ""
+msgstr "Project-Id-Version: Tavoos Article TOC 1.0.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-10-07 00:00+0000\nPO-Revision-Date: 2026-10-07 00:00+0000\nLast-Translator: Tavoos Web\nLanguage-Team: \nLanguage: \nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Domain: tavoos-article-toc\n"
+
+msgid "Always collapsed"
+msgstr ""
+
+msgid "Always expanded"
+msgstr ""
+
+msgid "An accessible, expandable table of contents for article headings, with RTL support and configurable display settings."
+msgstr ""
+
+msgid "Article TOC"
+msgstr ""
+
+msgid "At the start of the content"
+msgstr ""
+
+msgid "Automatic table of contents"
+msgstr ""
+
+msgid "Before the first heading"
+msgstr ""
+
+msgid "Build a table of contents from headings without changing the saved article. No external services or tracking."
+msgstr ""
+
+msgid "Custom content selector"
+msgstr ""
+
+msgid "Display settings"
+msgstr ""
+
+msgid "Enable automatic display"
+msgstr ""
+
+msgid "Expanded on desktop, collapsed on mobile"
+msgstr ""
+
+msgid "H2 is used if no heading level is selected."
+msgstr ""
+
+msgid "Heading levels"
+msgstr ""
+
+msgid "If the legacy Tavoos TOC is detected, this plugin stays inactive on that page. Do not disable entire HFCM snippets; remove only their TOC code during a separately approved migration."
+msgstr ""
+
+msgid "In this article"
+msgstr ""
+
+msgid "Initial state"
+msgstr ""
+
+msgid "Leave empty to use the translated default title."
+msgstr ""
+
+msgid "Minimum headings"
+msgstr ""
+
+msgid "Optional CSS selector for the article body, for example .entry-content. Leave empty for automatic WordPress content detection. Never select the whole page. An invalid selector safely disables the table."
+msgstr ""
+
+msgid "Placement"
+msgstr ""
+
+msgid "Post types"
+msgstr ""
+
+msgid "Scroll offset (pixels)"
+msgstr ""
+
+msgid "Select no post types to disable display everywhere."
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Table of contents"
+msgstr ""
+
+msgid "Tavoos Article TOC"
+msgstr ""
+
+msgid "Title"
+msgstr ""
