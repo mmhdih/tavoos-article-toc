@@ -1,0 +1,51 @@
+name: Publish plugin release
+on:
+  push:
+    tags:
+      - 'v[0-9]*'
+permissions:
+  contents: write
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+      - name: Check tag and build installation ZIP
+        run: |
+          python3 tools/build-release.py
+          python3 - <<'PY'
+          import os, re
+          from pathlib import Path
+          version = re.search(r'^ \* Version: ([0-9.]+)$', Path('tavoos-article-toc.php').read_text(), re.M).group(1)
+          if os.environ['GITHUB_REF_NAME'] != 'v' + version:
+              raise SystemExit('Release tag and plugin version disagree')
+          PY
+      - name: Check runtime syntax
+        run: |
+          php -l tavoos-article-toc.php
+          php -l includes/class-plugin.php
+          php -l uninstall.php
+          node --check assets/toc.js
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - name: Publish release and installation ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/*.zip \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --title "Tavoos Article TOC $GITHUB_REF_NAME" \
+            --notes-file docs/RELEASE-1.0.0.fa.md
