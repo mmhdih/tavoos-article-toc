@@ -1,0 +1,50 @@
+name: Publish approved WordPress.org 1.0.0
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Validate and stage the approved 1.0.0 release without publishing
+        type: boolean
+        default: true
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wordpress-org-tavoos-article-toc-1.0.0
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.repository == 'mmhdih/tavoos-article-toc' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out deployment tooling only
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Check required tools
+        run: |
+          command -v python3
+          command -v php
+          command -v node
+          command -v svn
+          svn --version --quiet
+      - name: Download, verify and stage the exact approved release without credentials
+        run: python3 tools/publish-approved-wordpress-1.0.0.py prepare "$RUNNER_TEMP/tavoos-article-toc-1.0.0"
+      - name: Publish this approved release using existing repository secrets
+        if: inputs.dry_run == false
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        run: python3 tools/publish-approved-wordpress-1.0.0.py publish "$RUNNER_TEMP/tavoos-article-toc-1.0.0"
+      - name: Verify committed SVN files independently
+        if: inputs.dry_run == false
+        run: python3 tools/publish-approved-wordpress-1.0.0.py verify-remote "$RUNNER_TEMP/tavoos-article-toc-1.0.0"
+      - name: Report dry run
+        if: inputs.dry_run
+        run: echo 'Approved 1.0.0 package and SVN staging verified. No authentication or publication was attempted.' >> "$GITHUB_STEP_SUMMARY"
