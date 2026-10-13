@@ -184,14 +184,14 @@ def publish(work):
 
 
 def verify_remote(work):
-    for remote, local in (("trunk", "remote-trunk"), ("tags/" + VERSION, "remote-tag"), ("assets", "remote-assets")):
-        destination = work / local
-        run("svn", "export", "--non-interactive", SVN_URL + remote, str(destination))
-        (verify_assets if remote == "assets" else verify_package)(destination)
     log = ET.fromstring(run("svn", "log", "--xml", "--limit", "1", "--non-interactive", SVN_URL))
     latest = log.find("logentry")
     require(latest is not None and latest.get("revision", "").isdigit(), "Cannot verify the SVN revision")
     revision = latest.get("revision")
+    for remote, local in (("trunk", "remote-trunk"), ("tags/" + VERSION, "remote-tag"), ("assets", "remote-assets")):
+        destination = work / local
+        run("svn", "export", "--non-interactive", "-r", revision, SVN_URL + remote, str(destination))
+        (verify_assets if remote == "assets" else verify_package)(destination)
     summary = f"Verified SVN revision {revision}: trunk and tags/1.0.0 exactly match the approved eight-file package; directory artwork verified.\n\nPublic directory indexing/download availability must still be verified separately.\n\nhttps://wordpress.org/plugins/tavoos-article-toc/\n"
     print(summary)
     if os.environ.get("GITHUB_STEP_SUMMARY"):
