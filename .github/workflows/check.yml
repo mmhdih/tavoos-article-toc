@@ -16,6 +16,14 @@ jobs:
         run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l
       - name: JavaScript syntax
         run: node --check assets/toc.js
+      - name: Release working-copy regression guards
+        if: matrix.php == '8.4'
+        run: |
+          if ! command -v svn >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install --yes --no-install-recommends subversion
+          fi
+          python3 tools/test-publish-approved-wordpress-1.0.0.py
       - name: Build installable ZIP
         run: python3 tools/build-release.py
       - uses: actions/upload-artifact@v4
