@@ -126,7 +126,15 @@ def verify_wc(wc):
     for entry in status.findall(".//entry"):
         item = entry.find("wc-status")
         require(item is not None and item.get("item") in {"added", "normal", "none"}, "Unexpected SVN working-copy changes")
-        require(item.get("tree-conflicted") != "true" and item.get("props") in {"none", "normal"}, "SVN conflict or unexpected properties")
+        require(item.get("tree-conflicted") != "true", "SVN tree conflict")
+        if item.get("props") == "modified" and item.get("item") == "added":
+            path = Path(entry.get("path", "")).resolve()
+            require(path in {(wc / "assets" / name).resolve() for name in ASSETS}, "Unexpected SVN property changes outside directory artwork")
+            properties = ET.fromstring(run("svn", "proplist", "--xml", "--verbose", str(path)))
+            actual = [(prop.get("name"), prop.text) for prop in properties.findall(".//property")]
+            require(actual == [("svn:mime-type", "image/png")], "Unexpected artwork properties; only svn:mime-type=image/png is allowed")
+        else:
+            require(item.get("props") in {"none", "normal"}, "SVN conflict or unexpected properties")
         remote = entry.find("repos-status")
         require(remote is None or (remote.get("item") == "none" and remote.get("props") in {"none", "normal"}), "SVN changed remotely; stop and inspect")
 
@@ -154,7 +162,9 @@ def prepare(work):
     if empty:
         shutil.copytree(package, wc / "trunk", dirs_exist_ok=True)
         shutil.copytree(assets, wc / "assets", dirs_exist_ok=True)
-        run("svn", "add", "--force", "--no-ignore", str(wc / "trunk"), str(wc / "assets"))
+        run("svn", "add", "--force", "--no-ignore", "--no-auto-props", str(wc / "trunk"), str(wc / "assets"))
+        for name in ASSETS:
+            run("svn", "propset", "svn:mime-type", "image/png", str(wc / "assets" / name))
         run("svn", "copy", str(wc / "trunk"), str(wc / "tags" / VERSION))
     else:
         print("Existing SVN content found; proceeding only if all bytes already match this approved release.")
